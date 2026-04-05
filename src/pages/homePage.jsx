@@ -6,7 +6,7 @@ export default function HomePage() {
         <div>
             <Header />
             <Link to="/register" className="text-blue-500 underline">
-                Register
+                home page
             </Link> 
         </div>
     )
