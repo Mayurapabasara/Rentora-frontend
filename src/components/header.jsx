@@ -1,32 +1,87 @@
 import { Link } from "react-router-dom";
+import { Search, Bell } from "lucide-react";
 
 export default function Header() {
     return (
-        <header className="w-full h-20 bg-primary/95 backdrop-blur-md shadow-md flex items-center justify-between px-8 fixed top-0 z-50">
+        <div className="w-full fixed top-4 z-50 flex justify-center px-4">
             
-            {/* Logo + Brand */}
-            <div className="flex items-center gap-3">
-                <img 
-                    src="/logo.png" 
-                    alt="Rentora Logo" 
-                    className="h-10 w-10 object-contain"
-                />
-                <h1 className="text-2xl font-bold tracking-wide text-white"> Rentora </h1>
-            </div>
+            <header className="w-full max-w-8xl h-20 flex items-center justify-between px-10
+                bg-white rounded-2xl shadow-lg border border-gray-200">
 
-            {/* Navigation */}
-            <nav>
-                <ul className="flex items-center gap-8 text-sm font-medium">
-                    
-                    <li><Link to="/" className="hover:text-accent transition">Home</Link></li>
-                    <li><Link to="/register" className="hover:text-accent transition">Register</Link></li>
-                    <li><Link to="/contact" className="hover:text-accent transition">Contact</Link></li>
-                    <li><Link to="/admin" className="hover:text-accent transition">Admin</Link></li>
-                    
+                {/* Logo */}
+                <div className="flex items-center gap-3">
+                    <img 
+                        src="/logo.png" 
+                        alt="logo" 
+                        className="h-10 w-12 object-contain"
+                    />
+                    <img 
+                        src="/rentora_name.png" 
+                        alt="name" 
+                        className="h-8 object-contain"
+                    />
+                </div>
+
+                {/* Navigation */}
+                <nav>
+                    <ul className="flex items-center gap-20 text-[18px] font-semibold text-gray-800">
+                        
+                        <li>
+                            <Link to="/" className="relative group">
+                                HOME
+                                <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-orange-500"></span>
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link to="/services" className="hover:text-orange-500 transition">
+                                SERVICES
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link to="/track" className="hover:text-orange-500 transition">
+                                TRACK YOUR ORDER
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link to="/company" className="hover:text-orange-500 transition">
+                                COMPANY
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
+
+                {/* Right Side */}
+                <div className="flex items-center gap-5">
+
+                    {/* Search */}
+                    <Search className="w-5 h-5 cursor-pointer hover:text-orange-500 transition" />
+
+                    {/* Notification */}
+                    <div className="relative">
+                        <Bell className="w-5 h-5 cursor-pointer hover:text-orange-500 transition" />
+                        
+                        {/* Badge */}
+                        <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs 
+                            w-5 h-5 flex items-center justify-center rounded-full">
+                            3
+                        </span>
+                    </div>
+
                     {/* CTA Button */}
-                    <li><Link to="/login" className="bg-accent text-white px-4 py-2 rounded-md hover:opacity-90 transition">Login</Link></li>
-                </ul>
-            </nav>
-        </header>
+                    <Link
+                        to="/book"
+                        className="ml-2 px-6 py-2.5 rounded-full text-white font-semibold
+                        bg-orange-500 shadow-md hover:shadow-lg hover:scale-105
+                        transition-all duration-300"
+                    >
+                        BOOK NOW
+                    </Link>
+                </div>
+
+            </header>
+        </div>
     );
 }
