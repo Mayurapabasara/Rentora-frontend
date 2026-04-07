@@ -1,17 +1,39 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     async function handleLogin() {
-        const response = await axios.post("http://localhost:5000/users/login", {
+       
+        try{
+             const response = await axios.post(import.meta.env.VITE_API_URL+"/api/users/login", {
             email : email,
             password : password
-        });
-        console.log(response);
+            });
+            
+            localStorage.setItem("token", response.data.token);
+            const data = response.data;
+            toast.success("Login successful!");
+
+            if(data.user.role === "admin"){
+                navigate("/admin");
+                //window.location.href = "/admin";
+            }else{
+                navigate("/");
+                //window.location.href = "/";
+            }
+
+        } catch (error) {
+            console.error("Error logging in:", error);
+            //alert("Login failed. Please check your credentials and try again.");
+            toast.error("Login failed. Please check your credentials and try again.");
+        }
     }
 
 

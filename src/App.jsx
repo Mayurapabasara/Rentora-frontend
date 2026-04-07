@@ -8,11 +8,15 @@ import AdminPage from "./pages/adminPage";
 import ContactPage from "./pages/contactPage";
 import TestPage from "./pages/testPage";
 import LoginPage from "./pages/loginPage";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="w-full h-screen bg-amber-100">
+
+        <Toaster position="top-right" />
+
         <Routes path="/" >
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterPage />} />
