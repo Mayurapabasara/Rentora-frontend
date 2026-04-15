@@ -7,6 +7,7 @@ import DashboardPage from "./admin/dashboardPage";
 import ProductPage from "./admin/productPage";
 import OrderPage from "./admin/orderPage";
 import UserPage from "./admin/userPage";
+import AddProductPage from "./admin/addProduct";
 
 
 export default function AdminPage() {
@@ -47,9 +48,8 @@ export default function AdminPage() {
                         <Route path="/products" element={<ProductPage />} />
                         <Route path="/orders" element={<OrderPage />} />
                         <Route path="/users" element={<UserPage />} />
-                    </Routes>
-
-                    
+                        <Route path="/addProduct" element={<AddProductPage />} />
+                    </Routes>  
                 </div>
             </div>
 
