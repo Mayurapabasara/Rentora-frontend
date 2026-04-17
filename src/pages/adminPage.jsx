@@ -8,6 +8,7 @@ import ProductPage from "./admin/productPage";
 import OrderPage from "./admin/orderPage";
 import UserPage from "./admin/userPage";
 import AddProductPage from "./admin/addProduct";
+import UpdateProductPage from "./admin/updateProductPage";
 
 
 export default function AdminPage() {
@@ -49,6 +50,7 @@ export default function AdminPage() {
                         <Route path="/orders" element={<OrderPage />} />
                         <Route path="/users" element={<UserPage />} />
                         <Route path="/addProduct" element={<AddProductPage />} />
+                        <Route path="/updateProduct/:id" element={<UpdateProductPage />} />
                     </Routes>  
                 </div>
             </div>

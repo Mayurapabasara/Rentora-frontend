@@ -1,28 +1,31 @@
 import { useState } from "react";
 import { FaDownload } from "react-icons/fa";
 import MediaUpload from "../../utils/mediaUpload";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-export default function AddProductPage() {
+export default function UpdateProductPage() {
 
-    const [productId, setProductId] = useState("");
-    const [name, setName] = useState("");
-    const [altName, setAltName] = useState("");
-    const [description, setDescription] = useState("");
+    const location = useLocation();
+    const product = location.state?.product || {};
+
+    const [productId, setProductId] = useState(product.productId || product._id || "");
+    const [name, setName] = useState(product.name || "");
+    const [altName, setAltName] = useState(product.altName ? product.altName.join(", ") : "");
+    const [description, setDescription] = useState(product.description || "");
     const [images, setImages] = useState([]);
-    const [price, setPrice] = useState(0);
-    const [labelledPrice, setLabelledPrice] = useState(0);
-    const [stock, setStock] = useState(0);
-    const [category, setCategory] = useState("");
+    const [price, setPrice] = useState(product.price || 0);
+    const [labelledPrice, setLabelledPrice] = useState(product.labelledPrice || 0);
+    const [stock, setStock] = useState(product.stock || 0);
+    const [category, setCategory] = useState(product.category || "" );
     const navigate = useNavigate();
 
-    async function addProduct() {
+    async function updateProduct() {
         const token = localStorage.getItem("token");
         if (!token) {
             navigate("/login");
-            alert("You must be logged in to add a product.");
+            alert("You must be logged in to update a product.");
             return;
         }
 
@@ -33,7 +36,12 @@ export default function AddProductPage() {
         }
 
         try {
-            const urls = await Promise.all(promises);
+            let urls = await Promise.all(promises);
+
+            if(urls.length === 0) {
+                urls = product.images || [];
+            }
+
             const alternativeNames = altName.split(",");
 
             const productData = {
@@ -48,18 +56,18 @@ export default function AddProductPage() {
                 stock: parseInt(stock)
             };
 
-            await axios.post(import.meta.env.VITE_API_URL + "/api/products", productData, {
+            await axios.put(import.meta.env.VITE_API_URL + "/api/products/" + (productId || product._id), productData, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
-            toast.success("Product added successfully!");
+            toast.success("Product updated successfully!");
             navigate("/admin/products");
                                                                                                                       
         }catch (error) {
             
-                console.error("Error adding product:", error);
-                alert("Failed to add product. Please try again.");
+                console.error("Error updating product:", error);
+                alert("Failed to update product. Please try again.");
         }
         
         //console.log(urls);
@@ -73,10 +81,10 @@ export default function AddProductPage() {
 
                 {/* HEADER */}
                 <h1 className="text-3xl font-semibold text-secondary mb-1">
-                    Add New Product
+                    Product Update
                 </h1>
                 <p className="text-sm text-muted mb-6">
-                    Fill in the details to add a new product
+                    Change the details to update the product
                 </p>
 
                 <form className="space-y-9">
@@ -88,6 +96,7 @@ export default function AddProductPage() {
                         </label>
                         <input
                             value={productId}
+                            disabled
                             onChange={(e) => setProductId(e.target.value)}
                             type="text"
                             placeholder="PRD001"
@@ -200,7 +209,7 @@ export default function AddProductPage() {
                     {/* Image Upload */}
                     <div>
                         <label className="text-lg font-medium text-[var(--color-secondary)] mb-1 block">
-                            Upload Images
+                            Update Images
                         </label>
 
                         <label className="mt-2 flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-[var(--color-border)] rounded-xl cursor-pointer hover:border-[var(--color-accent)] hover:bg-[var(--color-accent-light)] transition group relative">
@@ -251,10 +260,10 @@ export default function AddProductPage() {
                             Cancel
                         </button>
                         <button
-                            onClick={addProduct}
+                            onClick={updateProduct}
                             type="button"
                             className="w-[45%] py-3 rounded-lg bg-accent text-white font-medium shadow-md hover:shadow-lg hover:scale-[1.01] transition">
-                            Add Product
+                            Update Product
                         </button>
                     </div>
 

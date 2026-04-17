@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { CiCirclePlus } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import UpdateProductPage from "./updateProductPage";
+
 
 // const sampleProducts = [
 //   {
@@ -71,6 +73,7 @@ import { Link } from "react-router-dom";
 export default function ProductPage() {
 
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
       axios.get(import.meta.env.VITE_API_URL + "/api/products").then(
@@ -101,22 +104,31 @@ export default function ProductPage() {
                 <th className="border p-2">Price</th>
                 <th className="border p-2">Labelled Price</th>
                 <th className="border p-2">Category</th>
+                <th className="border p-2">Stock</th>
                 <th className="border p-2">Actions</th>
               </tr>
             </thead>
             <tbody>
               {products.map((product) => (
                 <tr key={product.productId || product._id}>
-                  <td className="border p-2"><img src={product.images[0]} alt={product.name} className="w-full h-full object-contain" /></td>
+                  <td className="border p-2"><img src={product.images[0]} alt={product.name} className="w-[200px] h-full object-contain" /></td>
                   <td className="border p-2">{product.productId || product._id}</td>
                   <td className="border p-2">{product.name}</td>
                   <td className="border p-2">{product.description}</td>
                   <td className="border p-2">{product.price}</td>
                   <td className="border p-2">{product.labelledPrice}</td>
                   <td className="border p-2">{product.category}</td>
+                  <td className="border p-2">{product.stock}</td>
                   <td className="border p-2">
-                    <button className="bg-blue-500 text-white hover:text-red-500 px-2 py-1 rounded mr-2">Edit</button>
+
+                    <button onClick={() => 
+                      navigate(`/admin/updateProduct/${product.productId || product._id}`, { state: { product } })} 
+                      className="bg-blue-500 text-white hover:text-red-500 px-2 py-1 rounded mr-2">
+
+                        Edit  
+                    </button>
                     <button className="bg-red-500 text-white hover:text-black px-2 py-1 rounded">Delete</button>
+
                   </td>
                 </tr>
               ))}
