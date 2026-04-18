@@ -64,17 +64,17 @@ export default function LoginPage() {
                         (e)=>{
                             setEmail(e.target.value)
                         }
-                    } type="text" placeholder="Email" className="w-125 h-15 rounded-md px-3 bg-white/50" />
+                    } type="text" placeholder="Email" className="w-125 h-15 text-[22px] rounded-md px-3 bg-white/50" />
 
                     <input onChange={
                         (e)=>{
                             setPassword(e.target.value)
                         }
-                    } type="password" placeholder="Password" className="w-125 h-15 rounded-md px-3 bg-white/50" />
+                    } type="password" placeholder="Password" className="w-125 h-15 text-[22px] rounded-md px-3 bg-white/50" />
 
-                    <button onClick={handleLogin} className="w-125 h-15 bg-orange-500 text-white rounded-2xl p-2.5">Login</button>
+                    <button onClick={handleLogin} className="w-125 h-15 bg-orange-500 text-white text-[22px] text-bold rounded-2xl p-2.5 hover:bg-orange-600">Login</button>
 
-                    <p className="text-sm text-center text-md text-gray-200">
+                    <p className="text-lg text-center text-md text-shadow-black">
                         Don’t have an account?{" "}
                         <span className="text-blue-800 cursor-pointer hover:underline">
                         Sign up

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
 import UpdateProductPage from "./updateProductPage";
+import toast from "react-hot-toast";
+import { Loader } from "../../components/loader";
 
 
 // const sampleProducts = [
@@ -70,30 +72,85 @@ import UpdateProductPage from "./updateProductPage";
 // ];
 
 
+function  ProductDeleteConfirm(props) {
+  const productId = props.productId;
+  const close = props.close;
+  const refresh = props.refresh;
+
+  function deleteProduct() {
+    axios.delete(import.meta.env.VITE_API_URL + "/api/products/" + productId, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((response) => {
+      toast.success("Product deleted successfully!");
+      console.log("Product deleted successfully");
+      close();
+      refresh();
+    }).catch((error) => {
+      toast.error("Failed to delete product. Please try again.");
+      console.error("Error deleting product:", error);
+      alert("Failed to delete product. Please try again.");
+    });
+  }
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-[#00000080] bg-opacity-50 z-100">
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h2 className="text-xl font-bold mb-4">Confirm Deletion</h2>
+        <p className="mb-6">Are you sure you want to delete the product with product ID : {productId}?</p>
+        <div className="flex justify-end gap-4">
+
+          <button  className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition" onClick={close}>
+            Cancel
+          </button>
+
+          <button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition" onClick={deleteProduct}>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+}
+
 export default function ProductPage() {
 
     const [products, setProducts] = useState([]);
+    const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
+    const [productToDelete, setProductToDelete] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
-      axios.get(import.meta.env.VITE_API_URL + "/api/products").then(
-        (response) => {
-            console.log(response.data);
-            setProducts(response.data);
+
+      if(isLoading) {
+        axios.get(import.meta.env.VITE_API_URL + "/api/products").then(
+          (response) => {
+          console.log(response.data);
+          setProducts(response.data);
+          setIsLoading(false);
 
         }).catch((error) => {
             console.error("Error fetching products:", error);
-        }
-    );
-    }, []);
+        });
+      }
+      
+    }, [isLoading]);
 
     return (
         <div className="w-full h-screen text-black">
+
+          {
+            isDeleteConfirmVisible && <ProductDeleteConfirm refresh={() => setIsLoading(true)} productId={productToDelete} close={() => setIsDeleteConfirmVisible(false)} />
+          }
 
           <Link className="fixed right-20 bottom-15 text-6xl" to="/admin/addProduct">
             <CiCirclePlus className="hover:text-accent"/>
           </Link>
 
+          {isLoading? <Loader /> :
           <table className="w-full border-collapse">
             <thead>
               <tr>
@@ -121,19 +178,29 @@ export default function ProductPage() {
                   <td className="border p-2">{product.stock}</td>
                   <td className="border p-2">
 
-                    <button onClick={() => 
+                    <button 
+                      onClick={() => 
                       navigate(`/admin/updateProduct/${product.productId || product._id}`, { state: { product } })} 
                       className="bg-blue-500 text-white hover:text-red-500 px-2 py-1 rounded mr-2">
 
                         Edit  
                     </button>
-                    <button className="bg-red-500 text-white hover:text-black px-2 py-1 rounded">Delete</button>
+                    <button 
+                      onClick={() => {
+                        setIsDeleteConfirmVisible(true);
+                        setProductToDelete(product.productId || product._id);
+                        
+                      }}
+                      className="bg-red-500 text-white hover:text-black px-2 py-1 rounded">
+                        Delete
+                      </button>
 
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+          }
         </div>
     );
 }

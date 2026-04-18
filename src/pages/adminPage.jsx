@@ -17,10 +17,10 @@ export default function AdminPage() {
             
             {/* Sidebar */}
             <div className="h-full w-100 bg-orange-300 text-black p-4">
-                <div className="flex flex-row h-60 items-center gap-2 mb-6">
-                    <img src="rentora_logo.png" alt="Logo" className="w-100 h-80 mb-4 justify-center" />
+                <div className="flex flex-row h- items-center gap-2 mb-6 animate-pulse">
+                    <img src="rentora_logo.png" alt="Rentora" className="w-100 h-80 mb-4 justify-center" />
                 </div>
-                <div className="w-full h-[75%] flex flex-col gap-4 bg-orange-200 p-4 rounded-3xl">
+                <div className="w-full h-[73%] flex flex-col gap-4 bg-orange-200 p-4 rounded-3xl">
 
                     <Link to="/admin" className="px-10 py-2 rounded-lg text-3xl font-bold flex flex-cols  hover:bg-orange-500 transition-colors duration-300 items-center gap-2">
                         <MdDashboardCustomize />

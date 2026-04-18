@@ -1,10 +1,12 @@
 
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import Header from "../components/header";
+import { ProductListPage } from "./productListPage";
+import Footer from "../components/footer";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="min-h-screen bg-black/10 text-black">
       <Header />
 
       {/* Hero Section */}
@@ -51,24 +53,30 @@ export default function HomePage() {
         </div>
       </section>
 
+
+      {/* Product List Section */}
+      <div className="w-full h-screen flex items-center justify-center bg-white/10 backdrop-blur-md rounded-3xl text-black">
+        <ProductListPage />
+      </div>
+
       {/* Features Section */}
       <section className="grid md:grid-cols-3 gap-6 px-10 pb-20">
         
-        <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-md">
+        <div className="bg-white backdrop-blur-md p-6 rounded-xl shadow-md">
           <h3 className="text-xl font-bold mb-2 text-accent">Easy Rentals</h3>
           <p className="text-secondary">
             Browse and rent products with just a few clicks.
           </p>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-md">
+        <div className="bg-white backdrop-blur-md p-6 rounded-xl shadow-md">
           <h3 className="text-xl font-bold mb-2 text-accent">Secure Payments</h3>
           <p className="text-secondary">
             Safe and reliable payment system for all users.
           </p>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-md">
+        <div className="bg-white backdrop-blur-md p-6 rounded-xl shadow-md">
           <h3 className="text-xl font-bold mb-2 text-accent">User Friendly</h3>
           <p className="text-secondary">
             Clean interface designed for the best user experience.
@@ -76,6 +84,8 @@ export default function HomePage() {
         </div>
 
       </section>
+
+      <Footer />
 
     </div>
   );
