@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function ProductCard({ product }) {
@@ -56,11 +56,11 @@ export default function ProductCard({ product }) {
                 }
 
                 {/* View Peoduct Button*/}
-                <button
-                    onClick={() => navigate(`/product/${product.productId || product._id}`)}
-                    className="mt-4 px-6 py-2 h-15 rounded-full border border-orange-500 text-orange-500 text-2xl font-semibold hover:bg-orange-500 hover:text-white transition duration-300 shadow-sm">
+                <Link
+                    to={ "/overview/"+product.productId }
+                    className="mt-4 px-6 py-3 h-14 flex items-center justify-center rounded-full border border-orange-500 text-orange-500 text-lg font-semibold  hover:bg-orange-500 hover:text-white transition duration-300 shadow-sm">
                     View Product
-                </button>
+                </Link>
 
             </div>
         </div>

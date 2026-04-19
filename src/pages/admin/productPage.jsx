@@ -170,10 +170,10 @@ export default function ProductPage() {
                 <tr key={product.productId || product._id}>
                   <td className="border p-2"><img src={product.images[0]} alt={product.name} className="w-[200px] h-full object-contain" /></td>
                   <td className="border p-2">{product.productId || product._id}</td>
-                  <td className="border p-2">{product.name}</td>
-                  <td className="border p-2">{product.description}</td>
-                  <td className="border p-2">{product.price}</td>
-                  <td className="border p-2">{product.labelledPrice}</td>
+                  <td className="border p-2 w-50">{product.name}</td>
+                  <td className="border p-2 w-250">{product.description}</td>
+                  <td className="border p-2 w-30">{product.price}</td>
+                  <td className="border p-2 w-30">{product.labelledPrice}</td>
                   <td className="border p-2">{product.category}</td>
                   <td className="border p-2">{product.stock}</td>
                   <td className="border p-2">

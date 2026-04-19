@@ -1,8 +1,10 @@
 
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Router, Routes } from "react-router-dom";
 import Header from "../components/header";
 import { ProductListPage } from "./productListPage";
 import Footer from "../components/footer";
+import ContactPage from "./contactPage";
+
 
 export default function HomePage() {
   return (
@@ -59,28 +61,23 @@ export default function HomePage() {
         <ProductListPage />
       </div>
 
+
       {/* Features Section */}
       <section className="grid md:grid-cols-3 gap-6 px-10 pb-20">
         
         <div className="bg-white backdrop-blur-md p-6 rounded-xl shadow-md">
           <h3 className="text-xl font-bold mb-2 text-accent">Easy Rentals</h3>
-          <p className="text-secondary">
-            Browse and rent products with just a few clicks.
-          </p>
+          <p className="text-secondary">Browse and rent products with just a few clicks.</p>
         </div>
 
         <div className="bg-white backdrop-blur-md p-6 rounded-xl shadow-md">
           <h3 className="text-xl font-bold mb-2 text-accent">Secure Payments</h3>
-          <p className="text-secondary">
-            Safe and reliable payment system for all users.
-          </p>
+          <p className="text-secondary">Safe and reliable payment system for all users.</p>
         </div>
 
         <div className="bg-white backdrop-blur-md p-6 rounded-xl shadow-md">
           <h3 className="text-xl font-bold mb-2 text-accent">User Friendly</h3>
-          <p className="text-secondary">
-            Clean interface designed for the best user experience.
-          </p>
+          <p className="text-secondary">Clean interface designed for the best user experience.</p>
         </div>
 
       </section>

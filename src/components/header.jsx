@@ -34,7 +34,13 @@ export default function Header() {
                         </li>
 
                         <li>
-                            <Link to="/services" className="hover:text-orange-500 transition">
+                            <Link to="/category" className="hover:text-orange-500 transition">
+                                CATEGORY                           
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link to="/service" className="hover:text-orange-500 transition">
                                 SERVICES
                             </Link>
                         </li>
@@ -46,8 +52,8 @@ export default function Header() {
                         </li>
 
                         <li>
-                            <Link to="/company" className="hover:text-orange-500 transition">
-                                COMPANY
+                            <Link to="/contact" className="hover:text-orange-500 transition">
+                                CONTACT
                             </Link>
                         </li>
                     </ul>
