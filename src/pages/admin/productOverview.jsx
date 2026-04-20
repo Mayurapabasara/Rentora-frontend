@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 import { useLocation, useParams } from "react-router-dom"
 import ImageSlider from "../../components/imageSlider"
+import { addToCart, loadCart } from "../../utils/Cart"
 
 export default function ProductOverview() {
 
@@ -84,15 +85,23 @@ export default function ProductOverview() {
                         }
 
                         {/* Add to Cart & Buy Now */}
-                        <div className="w-200 flex flex-col sm:flex-row gap-4 mt-6">
+                        <div className="w-200  flex flex-col sm:flex-row gap-4 mt-6">
 
                             {/* Add to Cart */}
-                            <button className="flex-1 py-3 rounded-full border border-orange-500 text-orange-500 font-semibold hover:bg-orange-500 hover:text-white transition-all duration-300 shadow-sm">
+                            <button 
+                                className="flex-1 py-3 rounded-full border border-orange-500 text-orange-500 font-semibold hover:bg-orange-500 hover:text-white transition-all duration-300 shadow-sm"
+                                onClick={()=>{
+                                    addToCart(product,1)
+                                    toast.success("Ädd to Cart");
+                                }}>
                                 Add to Cart
                             </button>
 
                             {/* Buy Now */}
-                            <button className="flex-1 py-3 rounded-full bg-orange-500 text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+                            <button className="flex-1 py-3 rounded-full bg-orange-500 text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+                                onClick={()=>{
+                                    console.log(loadCart())
+                                }}>
                                 Buy Now
                             </button>
 

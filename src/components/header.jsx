@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Search, Bell } from "lucide-react";
+import { FaCartArrowDown } from "react-icons/fa";
+import { IoCartOutline } from "react-icons/io5";
 
 export default function Header() {
     return (
@@ -63,16 +65,27 @@ export default function Header() {
                 <div className="flex items-center gap-5">
 
                     {/* Search */}
-                    <Search className="w-5 h-5 cursor-pointer hover:text-orange-500 transition" />
+                    <Search className="w-6 h-6 cursor-pointer hover:text-orange-500 transition" />
 
                     {/* Notification */}
                     <div className="relative">
-                        <Bell className="w-5 h-5 cursor-pointer hover:text-orange-500 transition" />
+                        <Bell className="w-6 h-6 cursor-pointer hover:text-orange-500 transition" />
                         
                         {/* Badge */}
                         <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs 
                             w-5 h-5 flex items-center justify-center rounded-full">
                             3
+                        </span>
+                    </div>
+
+                    {/* Cart */}
+                    <div className="relative">
+                        <IoCartOutline className="w-7 h-7 cursor-pointer hover:text-orange-500 transition" />
+                        
+                        {/* Badge */}
+                        <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs 
+                            w-5 h-5 flex items-center justify-center rounded-full">
+                            2
                         </span>
                     </div>
 

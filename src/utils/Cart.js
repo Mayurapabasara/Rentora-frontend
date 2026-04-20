@@ -13,7 +13,7 @@ export function loadCart() {
 }
 
 export function addToCart(porduct, quantity) {
-    let cart = LoadCart()
+    let cart = loadCart()
 
     // user cart ekt item ekk add krddi danatamath eka cart eke thiynvd kiyl check kirima sidu karai
     const existingItemIndex = cart.findindex(
