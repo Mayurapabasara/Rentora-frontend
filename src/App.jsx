@@ -13,11 +13,12 @@ import { ProductListPage } from "./pages/productListPage";
 import ProductOverview from "./pages/admin/productOverview";
 import CategoryPage from "./pages/category";
 import ServicesPage from "./pages/servicepage";
+import CartPage from "./pages/cart";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="w-full h-screen bg-amber-100">
+      <div className="w-full h-screen">
 
         <Toaster position="top-right" />
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/overview/:id" element={<ProductOverview />} />
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/service" element={<ServicesPage />} />
+          <Route path="/cart" element={<CartPage />} />
 
           <Route path="/*" element={<h1>404 Not Found</h1>} />
           <Route path="/test" element={<TestPage />} />

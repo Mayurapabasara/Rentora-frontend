@@ -9,10 +9,10 @@ export default function CategoryPage() {
             <Header />
 
             {/* Main Content */}
-            <div className="flex pt-24 px-6 gap-6 mt-3.5">
+            <div className="flex pt-28 px-6 gap-6 mt-3.5">
 
                 {/* Sidebar */}
-                <aside className="w-[250px] bg-white rounded-xl shadow-md p-5 h-fit sticky top-24">
+                <aside className="w-62.5 bg-white rounded-xl shadow-md p-5 h-fit sticky top-24">
 
                     <h2 className="text-lg font-semibold mb-4">Filters</h2>
 

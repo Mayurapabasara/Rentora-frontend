@@ -15,7 +15,7 @@ export function ProductListPage() {
             axios.get(import.meta.env.VITE_API_URL + "/api/products").then(
                 (response) => {
                     console.log(response.data);
-                    setProducts(response.data);
+                    setProducts(response.data);      
                     setIsLoading(false);
                 }
             ).catch((error) => {

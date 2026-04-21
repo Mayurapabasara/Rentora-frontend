@@ -2,24 +2,29 @@ import { Link } from "react-router-dom";
 import { Search, Bell } from "lucide-react";
 import { FaCartArrowDown } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
+import { useEffect, useState } from "react"
+import { getCartCount } from "../utils/Cart"
 
 export default function Header() {
+
+    const [cartCount, setCartCount] = useState(getCartCount())
+
     return (
         <div className="w-full fixed top-4 z-50 flex justify-center px-4">
-            
+
             <header className="w-full max-w-8xl h-20 flex items-center justify-between px-10
                 bg-white rounded-2xl shadow-lg border border-gray-200">
 
                 {/* Logo */}
                 <div className="flex items-center gap-3">
-                    <img 
-                        src="/logo.png" 
-                        alt="logo" 
+                    <img
+                        src="/logo.png"
+                        alt="logo"
                         className="h-10 w-12 object-contain"
                     />
-                    <img 
-                        src="/rentora_name.png" 
-                        alt="name" 
+                    <img
+                        src="/rentora_name.png"
+                        alt="name"
                         className="h-8 object-contain"
                     />
                 </div>
@@ -27,7 +32,7 @@ export default function Header() {
                 {/* Navigation */}
                 <nav>
                     <ul className="flex items-center gap-20 text-[18px] font-semibold text-gray-800">
-                        
+
                         <li>
                             <Link to="/" className="relative group">
                                 HOME
@@ -37,7 +42,7 @@ export default function Header() {
 
                         <li>
                             <Link to="/category" className="hover:text-orange-500 transition">
-                                CATEGORY                           
+                                CATEGORY
                             </Link>
                         </li>
 
@@ -70,7 +75,7 @@ export default function Header() {
                     {/* Notification */}
                     <div className="relative">
                         <Bell className="w-6 h-6 cursor-pointer hover:text-orange-500 transition" />
-                        
+
                         {/* Badge */}
                         <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs 
                             w-5 h-5 flex items-center justify-center rounded-full">
@@ -80,12 +85,14 @@ export default function Header() {
 
                     {/* Cart */}
                     <div className="relative">
-                        <IoCartOutline className="w-7 h-7 cursor-pointer hover:text-orange-500 transition" />
-                        
+
+                        <Link to="/cart">
+                            <IoCartOutline className="w-7 h-7 cursor-pointer hover:text-orange-500 transition" />
+                        </Link>
+
                         {/* Badge */}
-                        <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs 
-                            w-5 h-5 flex items-center justify-center rounded-full">
-                            2
+                        <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                            {cartCount}
                         </span>
                     </div>
 

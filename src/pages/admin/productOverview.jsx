@@ -4,6 +4,7 @@ import toast from "react-hot-toast"
 import { useLocation, useParams } from "react-router-dom"
 import ImageSlider from "../../components/imageSlider"
 import { addToCart, loadCart } from "../../utils/Cart"
+import Header from "../../components/header"
 
 export default function ProductOverview() {
 
@@ -27,7 +28,8 @@ export default function ProductOverview() {
     }, [])
 
     return (
-        <div className="w-full h-screen flex flex-row bg-white">
+        <div className="w-full h-screen pt-30 flex flex-row bg-white">
+            <Header />
             {status == "loading" && <h1>Loading...</h1>}
 
             {status == "error" && <h1>Faild to load product details.</h1>}

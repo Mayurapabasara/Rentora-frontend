@@ -12,30 +12,31 @@ export function loadCart() {
     return cart;
 }
 
-export function addToCart(porduct, quantity) {
+export function addToCart(product, quantity) {
+
     let cart = loadCart()
 
     // user cart ekt item ekk add krddi danatamath eka cart eke thiynvd kiyl check kirima sidu karai
-    const existingItemIndex = cart.findindex(
+    const existingItemIndex = cart.findIndex(
         (item)=>{
-            return item.productID == product.productID
+            return item.productId == product.productId
         }
     )
 
-    if(existingitemindex == -1){
+    if(existingItemIndex === -1){
 
-        if(quantity<1){
+        if(quantity < 1){
             console.log("Quantity must be at least 1")
             return;
         }
 
         const cartItem = {
-            productID: product.productID,
+            productId: product.productId,
             name: product.name,
             price: product.price,
-            labelledPrice: product.lablledPrice,
+            labelledPrice: product.labelledPrice,
             quantity: quantity,
-            image: product.image[0]
+            image: product.images?.[0] || product.image
         }
         cart.push(cartItem)
 
@@ -45,14 +46,35 @@ export function addToCart(porduct, quantity) {
 
         const newQuantity = existingItem.quantity + quantity
 
-        if(new Quantity < 1){
-            cart = cart.filter(
-
-            )
+        if(newQuantity < 1){
+            cart = cart.filter(item => item.productId !== product.productd)
         }else {
             existingItem.quantity = newQuantity
         }
     }
 
     localStorage.setItem("cart", JSON.stringify(cart))
+}
+
+export function getTotal(){
+    const cart = loadCart()
+    let total = 0
+
+    cart.forEach((item) => {
+        total += item.price * item.quantity
+    })
+
+    return total;
+}
+
+export function getCartCount(){
+    const cart = loadCart()
+
+    let count = 0
+
+    cart.forEach((item) => {
+        count +=item.quantity || 0
+    })
+
+    return count
 }
