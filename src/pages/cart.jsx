@@ -14,12 +14,13 @@ export default function CartPage(){
         <div className="w-full h-full bg-black/10 pt-30 flex flex-row item-center">
             <Header />
 
-            <div className="w-250 flex flex-col gap-4 bg-white rounded-2xl mx-5">
+            <div className="w-250 flex flex-col gap-4 px-10 item-center rounded-2xl mx-5">
                 {
                     cart.map((item, index) => {
                         return (
-                            <div key={index} className="w-full h-30 bg-white flex relative">
+                            <div key={index} className="w-full h-30 bg-white flex relative gap-2">
 
+                                {/* Delete button */}
                                 <button className="absolute -right-12.5 text-2xl text-black font-bold rounded-full aspect-square hover:bg-accent hover:text-white items-center justify-center">
                                     <BiTrash />
                                 </button>

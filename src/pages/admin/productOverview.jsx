@@ -37,7 +37,7 @@ export default function ProductOverview() {
             {status == "success" && product && (
                 <div className="p-10 text-center flex flex-row">
 
-                    <div>
+                    <div className="object-cover ">
                         <ImageSlider images={product.images} />
                     </div>
 
