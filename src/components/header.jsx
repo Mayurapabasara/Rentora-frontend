@@ -98,7 +98,7 @@ export default function Header() {
 
                     {/* CTA Button */}
                     <Link
-                        to="/book"
+                        to="/checkout"
                         className="ml-2 px-6 py-2.5 rounded-full text-white font-semibold
                         bg-orange-500 shadow-md hover:shadow-lg hover:scale-105
                         transition-all duration-300"

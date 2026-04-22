@@ -4,12 +4,14 @@ import { addToCart, getTotal, loadCart } from "../utils/Cart"
 import { Trash } from "lucide-react"
 import { useEffect, useState } from "react"
 import { BiTrash } from "react-icons/bi"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
-export default function CartPage(){
+export default function CheckOutPage(){
 
-    // LoadCart
-    const [cart, setCart] = useState(loadCart())
+    const location = useLocation()
+    const [cart, setCart] = useState(() => {
+        return location.state || loadCart() || []
+    })
   
     return(
         <div className="w-full h-full bg-black/10 pt-30 flex flex-row item-center">
@@ -22,7 +24,12 @@ export default function CartPage(){
                             <div key={index} className="w-full h-30 bg-white flex relative gap-2">
 
                                 {/* Delete button */}
-                                <button className="absolute -right-12.5 text-2xl text-black font-bold rounded-full aspect-square hover:bg-accent hover:text-white items-center justify-center">
+                                <button 
+                                    className="absolute -right-12.5 text-2xl text-black font-bold rounded-full aspect-square hover:bg-accent hover:text-white items-center justify-center" 
+                                    onClick={()=>{
+                                        addToCart(item,-item.quantity)
+                                        setCart(loadCart())
+                                    }}>
                                     <BiTrash />
                                 </button>
 
@@ -63,10 +70,10 @@ export default function CartPage(){
                 }
                 <div className="w-full h-30 bg-white flex items-center justify-center gap-40">
 
-                    <Link state={cart} to="/checkout" className="text-2xl text-white text-bold px-6 py-2.5 border-4 bg-orange-500 border-orange-500 rounded-4xl flex justify-center items-center hover:scale-105
+                    <button className="text-2xl text-white text-bold px-6 py-2.5 border-4 bg-orange-500 border-orange-500 rounded-4xl flex justify-center items-center hover:scale-105
                         transition-all duration-300"> 
-                        Process Checkout
-                    </Link>
+                        Plase Order
+                    </button>
                     <div className="bg-accent-light">
                         <span>Total: LKR {getTotal().toFixed(2)}</span>
                     </div>

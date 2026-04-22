@@ -14,6 +14,7 @@ import ProductOverview from "./pages/admin/productOverview";
 import CategoryPage from "./pages/category";
 import ServicesPage from "./pages/servicepage";
 import CartPage from "./pages/cart";
+import CheckOutPage from "./pages/checkout";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/service" element={<ServicesPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckOutPage />} />
 
           <Route path="/*" element={<h1>404 Not Found</h1>} />
           <Route path="/test" element={<TestPage />} />
