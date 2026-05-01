@@ -30,7 +30,7 @@ export function ProductListPage() {
         <div className="w-full h-screen flex items-center justify-center backdrop-blur-md rounded-3xl text-black">
             {
                 isLoading ? <Loader /> : 
-                <div className="w-full h-full p-10 grid md:grid-cols-5 gap-6 overflow-y-scroll flex-wrap">
+                <div className="w-full h-full p-10 grid md:grid-cols-4 gap-6 overflow-y-scroll flex-wrap">
                     {
                         products.map((product) => (
                             <ProductCard

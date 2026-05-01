@@ -1,4 +1,7 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { addToCart } from "../utils/Cart";
+import toast from "react-hot-toast";
 
 
 export default function ProductCard({ product }) {
@@ -21,10 +24,14 @@ export default function ProductCard({ product }) {
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 
                     flex items-center justify-center transition duration-300">
 
-                    <Link to={ "/overview/"+product.productId } className="px-5 py-2 rounded-full bg-orange-500 text-white font-semibold
-                        shadow-md hover:scale-105 transition">
+                    <button className="px-5 py-2 rounded-full bg-orange-500 text-white font-semibold
+                        shadow-md hover:scale-105 transition"
+                         onClick={()=>{
+                                    addToCart(product,1)
+                                    toast.success("Ädd to Cart");
+                        }}>
                         Add to Cart
-                    </Link>
+                    </button>
                 </div>
             </div>
 

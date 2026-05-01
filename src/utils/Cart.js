@@ -78,3 +78,13 @@ export function getCartCount(){
 
     return count
 }
+
+export function removeFromCart(productId) {
+    let cart = loadCart();
+
+    cart = cart.filter((item) => item.productId !== productId);
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    return cart; // return updated cart (important)
+}
