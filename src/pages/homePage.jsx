@@ -63,7 +63,7 @@ export default function HomePage() {
 
 
       {/* Features Section */}
-      <section className="grid md:grid-cols-3 gap-6 px-10 pb-20">
+      <section className="grid md:grid-cols-3 py-8 gap-6 px-10 pb-20">
         
         <div className="bg-white backdrop-blur-md p-6 rounded-xl shadow-md">
           <h3 className="text-xl font-bold mb-2 text-accent">Easy Rentals</h3>

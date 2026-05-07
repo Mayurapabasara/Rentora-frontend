@@ -5,13 +5,18 @@ import { Trash } from "lucide-react"
 import { useEffect, useState } from "react"
 import { BiTrash } from "react-icons/bi"
 import { Link, useLocation } from "react-router-dom"
+import axios from "axios"
+import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom"
 
 export default function CheckOutPage() {
 
-    const location = useLocation()
+    const location = useLocation();
     const [cart, setCart] = useState(() => {
         return location.state || loadCart() || []
     })
+
+    const navigate = useNavigate();
 
     function getTotal() { 
         let total = 0
@@ -20,6 +25,49 @@ export default function CheckOutPage() {
                 total += item.price * item.quantity
         })
         return total
+    }
+
+    async function purchaseCart() {
+        
+        const token = localStorage.getItem("token");
+        console.log("TOKEN:", token);
+
+        if(!token || token === "null" || token === "undefined"){
+            toast.error("Session expired. Please login again.");
+            navigate("/login");
+            return;
+        }
+        try {
+
+            const items= [];
+            for(let i = 0; i < cart.length; i++){
+                items.push({
+                    productId: cart[i].productId,
+                    quantity: cart[i].quantity
+                })
+            }
+
+            await axios.post(import.meta.env.VITE_API_URL + "/api/orders", {                
+                address : "No 123, Main Street, Colombo",
+                items: items
+            },{
+                headers: {
+                    Authorization: `Bearer ${token}`,
+
+                },
+            })
+            toast.success("Order placed successfully");
+
+        }catch (error) {
+            alert("Failed to place order. Please try again.");
+            console.error("Order placement error:", error);
+
+            //if eror is 400
+            if(error.response && error.response.status === 400){
+                toast.error(error.response.data.message)
+            }
+        }         
+
     }
 
     return (
@@ -87,8 +135,9 @@ export default function CheckOutPage() {
                 }
                 <div className="w-full h-30 bg-white flex items-center justify-center gap-40">
 
-                    <button className="text-2xl text-white text-bold px-6 py-2.5 border-4 bg-orange-500 border-orange-500 rounded-4xl flex justify-center items-center hover:scale-105
-                        transition-all duration-300">
+                    <button 
+                        className="text-2xl text-white text-bold px-6 py-2.5 border-4 bg-orange-500 border-orange-500 rounded-4xl flex justify-center items-center hover:scale-105 transition-all duration-300" 
+                        onClick={purchaseCart}>
                         Plase Order
                     </button>
                     <div className="bg-accent-light">
