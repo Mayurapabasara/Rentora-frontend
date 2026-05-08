@@ -5,12 +5,15 @@ import { Link, useNavigate } from "react-router-dom";
 import UpdateProductPage from "./updateProductPage";
 import toast from "react-hot-toast";
 import { Loader } from "../../components/loader";
+import OrderModel from "../../components/orderaInfoModal";
 
 export default function OrderPage() {
 
     const [orders, setOrders] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+    const [isModelOpen, setIsModelOpen] = useState(false);
+    const [selectedOrder, setSelectedOrder] = useState(null);
 
     useEffect(() => {
 
@@ -43,9 +46,18 @@ export default function OrderPage() {
 
     return (
         <div className="w-full h-screen text-black">
-          <Link className="fixed right-20 bottom-15 text-6xl" to="/admin/addProduct">
-            <CiCirclePlus className="hover:text-accent"/>
-          </Link>
+
+         <OrderModel
+            isModalOpen={isModelOpen}
+            selectedOrder={selectedOrder}
+            closeModal={() => {
+              setIsModelOpen(false);
+              setSelectedOrder(null);
+            }}
+            refresh={() => {
+              setIsLoading(true);
+          }}
+        />
 
           {isLoading? <Loader /> :
           <table className="w-full border-collapse">
@@ -64,7 +76,11 @@ export default function OrderPage() {
             </thead>
             <tbody>
               {orders .map((order) => (
-                <tr key={order._id}>
+                <tr key={order._id}
+                  onClick={()=>{
+                    setSelectedOrder(order);
+                    setIsModelOpen(true);
+                  }}>
                   <td className="border p-2">{order.orderId}</td>
                   <td className="border p-2 w-5">{order.items.length}</td>
                   <td className="border p-2 w-100">{order.customerName}</td>
