@@ -1,41 +1,29 @@
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-
 import Header from "../components/header";
-
-import {
-    loadCart,
-    removeFromCart
-} from "../utils/Cart";
-
-import {
-    ShoppingBag,
-    ShieldCheck,
-    Truck,
-    CreditCard,
-    MapPin,
-    CheckCircle2
-} from "lucide-react";
-
+import {loadCart, removeFromCart} from "../utils/Cart";
+import {ShoppingBag,ShieldCheck,Truck,CreditCard,MapPin,CheckCircle2} from "lucide-react";
 import { useState } from "react";
-
 import { BiTrash } from "react-icons/bi";
-
 import { useLocation } from "react-router-dom";
-
 import axios from "axios";
 import toast from "react-hot-toast";
-
 import { useNavigate } from "react-router-dom";
+import { IoPersonOutline } from "react-icons/io5";
+import { FiPhoneCall } from "react-icons/fi";
 
 export default function CheckOutPage() {
 
     const location = useLocation();
+    const navigate = useNavigate();
+    const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
+    const [name, setName] = useState("");
 
     const [cart, setCart] = useState(() => {
         return location.state || loadCart() || [];
     });
 
-    const navigate = useNavigate();
+    
 
     function getTotal() {
 
@@ -78,7 +66,9 @@ export default function CheckOutPage() {
                 import.meta.env.VITE_API_URL + "/api/orders",
 
                 {
-                    address: "No 123, Main Street, Colombo",
+                    address: address,
+                    customerName: name==""?null:name,
+                    phone: phone==""?"Unknown":phone,
                     items: items
                 },
 
@@ -105,7 +95,7 @@ export default function CheckOutPage() {
 
     return (
 
-        <div className="w-full min-h-screen bg-gradient-to-b from-gray-100 to-white">
+        <div className="w-full min-h-screen bg-linear-to-b from-gray-100 to-white">
 
             <Header />
 
@@ -302,30 +292,40 @@ export default function CheckOutPage() {
                                     </h2>
 
                                     {/* Address */}
-                                    <div className="bg-orange-50 border border-orange-100 rounded-2xl p-5 mb-6">
-
+                                    <div className="bg-orange-50 border border-orange-100 rounded-2xl p-5 mb-6 gap-4">
                                         <div className="flex items-start gap-4">
-
                                             <div className="bg-orange-100 text-orange-500 p-3 rounded-xl">
-
-                                                <MapPin className="w-5 h-5" />
-
+                                                <IoPersonOutline className="w-5 h-5" />
                                             </div>
 
                                             <div>
-
-                                                <h3 className="font-semibold text-gray-800">
-                                                    Delivery Address
-                                                </h3>
-
-                                                <p className="text-gray-500 mt-1">
-                                                    No 123, Main Street, Colombo
-                                                </p>
-
+                                                <h3 className="font-semibold text-gray-800"> Delivery Person</h3>
+                                                <input type="text" value={name} id="name" onChange={(e) => setName(e.target.value)} className="text-gray-500 mt-1"/>
+                                                <hr></hr>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-4">
+                                            <div className="bg-orange-100 text-orange-500 p-3 rounded-xl">
+                                                <MapPin className="w-5 h-5" />
                                             </div>
 
+                                            <div>
+                                                <h3 className="font-semibold text-gray-800"> Delivery Address</h3>
+                                                <input type="text" value={address} id="address" onChange={(e) => setAddress(e.target.value)} className="text-gray-500 mt-1"/>
+                                                <hr></hr>
+                                            </div>
                                         </div>
+                                        <div className="flex items-start gap-4">
+                                            <div className="bg-orange-100 text-orange-500 p-3 rounded-xl">
+                                                <FiPhoneCall className="w-5 h-5" />
+                                            </div>
 
+                                            <div>
+                                                <h3 className="font-semibold text-gray-800"> Delivery Number</h3>
+                                                <input type="text" value={phone} id="phone" onChange={(e) => setPhone(e.target.value)} className="text-gray-500 mt-1"/>
+                                                <hr></hr>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     {/* Totals */}
@@ -455,7 +455,9 @@ export default function CheckOutPage() {
                             </div>
 
                         </div>
+                        
                     )
+                    
                 }
 
             </div>

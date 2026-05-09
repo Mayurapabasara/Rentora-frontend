@@ -124,7 +124,7 @@ export default function AdminPage() {
                     </div>
 
                     {/* Logout */}
-                    <button
+                    <Link to="/login"
                         className="w-full mt-5 flex items-center justify-center gap-3 py-3 rounded-2xl bg-gray-100 hover:bg-red-500 hover:text-white transition font-semibold"
                     >
 
@@ -132,7 +132,7 @@ export default function AdminPage() {
 
                         Logout
 
-                    </button>
+                    </Link>
 
                 </div>
             </div>
