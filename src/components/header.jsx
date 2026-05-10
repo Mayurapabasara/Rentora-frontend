@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Search, Bell, Menu, X } from "lucide-react";
 import { IoCartOutline } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getCartCount } from "../utils/Cart";
+import UserData from "./userData";
 
 export default function Header() {
 
@@ -255,6 +256,8 @@ export default function Header() {
                             >
                                 Login
                             </Link>
+
+                            <UserData />
 
                         </div>
 

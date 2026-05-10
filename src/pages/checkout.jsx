@@ -1,7 +1,7 @@
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import Header from "../components/header";
 import {loadCart, removeFromCart} from "../utils/Cart";
-import {ShoppingBag,ShieldCheck,Truck,CreditCard,MapPin,CheckCircle2} from "lucide-react";
+import {ShoppingBag,ShieldCheck,Truck,CreditCard,MapPin,CheckCircle2, Users} from "lucide-react";
 import { useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import { useLocation } from "react-router-dom";
