@@ -125,7 +125,7 @@ export default function Header() {
                     </div>
 
                     {/* Desktop Buttons */}
-                    <div className="hidden md:flex items-center gap-3">
+                    {/* <div className="hidden md:flex items-center gap-3">
 
                         <Link
                             to="/checkout"
@@ -147,7 +147,9 @@ export default function Header() {
                             LogOut
                         </Link>
 
-                    </div>
+                    </div> */}
+
+                    <UserData />
 
                     {/* Mobile Menu Button */}
                     <button

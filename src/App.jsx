@@ -15,7 +15,7 @@ import CategoryPage from "./pages/category";
 import ServicesPage from "./pages/servicepage";
 import CartPage from "./pages/cart";
 import CheckOutPage from "./pages/checkout";
-
+import ProfilePage from "./pages/profilePage";
 function App() {
   return (
     <BrowserRouter>
@@ -35,6 +35,7 @@ function App() {
           <Route path="/service" element={<ServicesPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckOutPage />} />
+          <Route path="/profilePage" element={<ProfilePage />} />
 
           <Route path="/*" element={<h1>404 Not Found</h1>} />
           <Route path="/test" element={<TestPage />} />
