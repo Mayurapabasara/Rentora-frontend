@@ -71,7 +71,7 @@ export default function ProfilePage() {
                 <div className="bg-white/90 backdrop-blur-2xl border border-white rounded-[40px] shadow-2xl overflow-hidden">
 
                     {/* HERO SECTION */}
-                    <div className="relative h-90 overflow-hidden bg-linear-to-r from-orange-500 via-orange-400 to-orange-500">
+                    <div className="relative h-90 overflow-hidden bg-linear-to-r from-orange-400 via-orange-300 to-orange-400">
 
                         {/* Glow Effects */}
                         <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-white/10 rounded-full blur-3xl"></div>
@@ -104,7 +104,7 @@ export default function ProfilePage() {
 
                                             alt="profile"
 
-                                            className="relative w-40 h-40 rounded-full border-[6px] border-white object-cover shadow-2xl"
+                                            className="relative w-80 h-60 rounded-full border-[6px] border-white object-cover shadow-2xl"
                                         />
 
                                         {/* Camera Button */}
@@ -120,7 +120,7 @@ export default function ProfilePage() {
                                     </div>
 
                                     {/* User Info */}
-                                    <div className="text-white text-center md:text-left">
+                                    <div className="text-black font-bold text-center md:text-left">
 
                                         <div className="flex items-center gap-3 justify-center md:justify-start">
 
@@ -157,9 +157,9 @@ export default function ProfilePage() {
                                 {/* RIGHT */}
                                 <div className="hidden lg:flex">
 
-                                    <div className="bg-white/15 backdrop-blur-2xl border border-white/20 rounded-[30px] p-8 text-white min-w-[320px] shadow-2xl">
+                                    <div className="bg-orange-500 backdrop-blur-2xl border border-white/20 rounded-[30px] p-2 text-white min-w-[320px] shadow-2xl">
 
-                                        <p className="text-orange-100 text-sm uppercase tracking-widest">
+                                        <p className="text-black text-sm uppercase tracking-widest flex items-center justify-center gap-2 justify-center md:justify-start">
                                             Account Overview
                                         </p>
 
@@ -174,25 +174,25 @@ export default function ProfilePage() {
                                         {/* Stats */}
                                         <div className="grid grid-cols-2 gap-4 mt-8">
 
-                                            <div className="bg-white/10 rounded-2xl p-4">
+                                            <div className="bg-white/10 rounded-2xl p-4 text-black font-semibold flex flex-col items-center justify-center">
 
                                                 <h3 className="text-2xl font-bold">
                                                     12
                                                 </h3>
 
-                                                <p className="text-sm text-orange-100 mt-1">
+                                                <p className="text-sm text-black mt-1">
                                                     Orders
                                                 </p>
 
                                             </div>
 
-                                            <div className="bg-white/10 rounded-2xl p-4">
+                                            <div className="bg-white/10 rounded-2xl p-4 text-black font-semibold text-align-center flex flex-col items-center justify-center">
 
                                                 <h3 className="text-2xl font-bold">
                                                     VIP
                                                 </h3>
 
-                                                <p className="text-sm text-orange-100 mt-1">
+                                                <p className="text-sm text-black mt-1">
                                                     Status
                                                 </p>
 

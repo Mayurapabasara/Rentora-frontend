@@ -1,29 +1,37 @@
 import React, { useState } from "react";
-
 import axios from "axios";
-
 import { Link, useNavigate } from "react-router-dom";
-
 import toast from "react-hot-toast";
-
-import {
-    Eye,
-    EyeOff,
-    Mail,
-    Lock,
-    ArrowRight
-} from "lucide-react";
+import {Eye,EyeOff,Mail,Lock,ArrowRight} from "lucide-react";
+import { useGoogleLogin } from "@react-oauth/google";
 
 export default function LoginPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const [showPassword, setShowPassword] = useState(false);
-
     const [loading, setLoading] = useState(false);
-
     const navigate = useNavigate();
+    const googleLogin = useGoogleLogin({
+        onSuccess: (tokenResponse) => {
+            axios.post(import.meta.env.VITE_API_URL + "/api/users/google-login", {
+                token: tokenResponse.access_token
+            }).then((res)=> {
+                localStorage.setItem("token", res.data.token);
+                toast.success("Login successful!");
+                const user = res.data.user;
+
+                if (user.role === "admin") {
+                    navigate("/admin");
+                }else {
+                    navigate("/");
+                }
+            }).catch((err) => {
+                console.error("Google login error:", err);
+                toast.error("Google login failed. Please try again.");
+            });
+        }
+    });
 
     async function handleLogin() {
 
@@ -69,6 +77,7 @@ export default function LoginPage() {
 
         }
     }
+
 
     return (
 
@@ -173,9 +182,9 @@ export default function LoginPage() {
                     {/* Forgot Password */}
                     <div className="flex justify-end">
 
-                        <button className="text-sm text-orange-400 hover:text-orange-300 transition">
+                        <Link to="/forget-password" className="text-sm text-orange-400 hover:text-orange-300 transition">
                             Forgot Password?
-                        </button>
+                        </Link>
 
                     </div>
 
@@ -186,15 +195,30 @@ export default function LoginPage() {
                         className="w-full h-14 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-semibold shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-3"
                     >
 
-                        {
-                            loading ? (
-
+                        {loading ? (
                                 <div className="w-5 h-5 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
-
                             ) : (
-
                                 <>
                                     Login
+                                    <ArrowRight className="w-5 h-5" />
+                                </>
+                            )
+                        }
+
+                    </button>
+
+                    {/* Google Login Button */}
+                    <button
+                        onClick={googleLogin}
+                        disabled={loading}
+                        className="w-full h-14 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-semibold shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-3"
+                    >
+
+                        {loading ? (
+                                <div className="w-5 h-5 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                            ) : (
+                                <>
+                                    Google Login
                                     <ArrowRight className="w-5 h-5" />
                                 </>
                             )
