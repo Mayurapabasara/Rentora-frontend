@@ -419,6 +419,8 @@ export default function ServicesPage() {
 
                 <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
 
+
+
                 <div className="relative z-10 max-w-5xl mx-auto text-center text-white">
 
                     <h2 className="text-5xl font-bold leading-tight">
