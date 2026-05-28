@@ -84,7 +84,7 @@ export default function HomePage() {
                 <div className="absolute top-0 left-0 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl"></div>
 
                 {/* Content */}
-                <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+                <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
 
                     <div className="max-w-3xl">
 
